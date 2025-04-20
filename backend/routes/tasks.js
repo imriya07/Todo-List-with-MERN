@@ -1,4 +1,3 @@
-
 const express = require('express');
 const {
   createTask,
@@ -7,8 +6,11 @@ const {
   deleteTask,
   markTaskAsCompleted
 } = require('../controllers/taskController');
+const auth = require('../middleware/auth'); 
 
 const router = express.Router();
+
+router.use(auth);
 
 router.post('/', createTask);
 router.get('/', getTasks);
