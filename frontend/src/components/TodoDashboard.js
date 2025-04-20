@@ -14,7 +14,7 @@ const TodoDashboard = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('authToken');
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await axios.get('https://backend-theta-plum-15.vercel.app/api/tasks', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,14 +32,14 @@ const TodoDashboard = () => {
     try {
       const token = localStorage.getItem('authToken');
       if (editTaskId) {
-        await axios.put(`http://localhost:5000/api/tasks/${editTaskId}`, {
+        await axios.put(`https://backend-theta-plum-15.vercel.app/api/tasks/${editTaskId}`, {
           title,
           description,
         }, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post("http://localhost:5000/api/tasks", {
+        await axios.post("https://backend-theta-plum-15.vercel.app/api/tasks", {
           title,
           description,
         }, {
@@ -58,7 +58,7 @@ const TodoDashboard = () => {
   const markAsCompleted = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      await axios.patch(`http://localhost:5000/api/tasks/${id}/complete`, null, {
+      await axios.patch(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}/complete`, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,7 +73,7 @@ const TodoDashboard = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await axios.delete(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
