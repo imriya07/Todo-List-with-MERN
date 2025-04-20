@@ -17,7 +17,7 @@ const TodoDashboard = () => {
     try {
       const token = localStorage.getItem("authToken");
       const res = await axios.get(
-        "https://backend-theta-plum-15.vercel.app/api/tasks",
+        "https://todo-lake-delta.vercel.app/api/tasks",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const TodoDashboard = () => {
       const token = localStorage.getItem("authToken");
       if (editTaskId) {
         await axios.put(
-          `https://backend-theta-plum-15.vercel.app/api/tasks/${editTaskId}`,
+          `https://todo-lake-delta.vercel.app/api/tasks/${editTaskId}`,
           { title, description },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -63,7 +63,7 @@ const TodoDashboard = () => {
         toast.warning("Task updated successfully!");
       } else {
         await axios.post(
-          "https://backend-theta-plum-15.vercel.app/api/tasks",
+          "https://todo-lake-delta.vercel.app/api/tasks",
           { title, description },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -87,7 +87,7 @@ const TodoDashboard = () => {
       const token = localStorage.getItem("authToken");
       const updatedStatus = !currentStatus;
       await axios.patch(
-        `https://backend-theta-plum-15.vercel.app/api/tasks/${id}/complete`,
+        `https://todo-lake-delta.vercel.app/api/tasks/${id}/complete`,
         { completed: updatedStatus },
         {
           headers: {
@@ -112,7 +112,7 @@ const TodoDashboard = () => {
     try {
       const token = localStorage.getItem("authToken");
       await axios.delete(
-        `https://backend-theta-plum-15.vercel.app/api/tasks/${id}`,
+        `https://todo-lake-delta.vercel.app/api/tasks/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

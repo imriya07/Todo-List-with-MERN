@@ -41,7 +41,7 @@ const Register = () => {
     if (!validateForm()) return;
   
     try {
-      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/register', {
+      const response = await axios.post('https://todo-lake-delta.vercel.app/api/auth/register', {
         name,
         email,
         password,
