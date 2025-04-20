@@ -13,7 +13,7 @@ const TodoDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      const res = await axios.get("https://backend-theta-plum-15.vercel.app/api/tasks");
       setTasks(res.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -26,12 +26,12 @@ const TodoDashboard = () => {
 
     try {
       if (editTaskId) {
-        await axios.put(`http://localhost:5000/api/tasks/${editTaskId}`, {
+        await axios.put(`https://backend-theta-plum-15.vercel.app/api/tasks/${editTaskId}`, {
           title,
           description,
         });
       } else {
-        await axios.post("http://localhost:5000/api/tasks", { title, description });
+        await axios.post("https://backend-theta-plum-15.vercel.app/api/tasks", { title, description });
       }
       fetchTasks();
       setTitle("");
@@ -44,7 +44,7 @@ const TodoDashboard = () => {
 
   const markAsCompleted = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/tasks/${id}/complete`);
+      await axios.patch(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}/complete`);
       fetchTasks();
     } catch (error) {
       console.error("Error marking task as completed:", error);
@@ -53,7 +53,7 @@ const TodoDashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+      await axios.delete(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}`);
       setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
