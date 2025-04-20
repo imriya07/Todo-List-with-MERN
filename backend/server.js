@@ -25,7 +25,8 @@ app.use("/api/auth", auth);
 app.use("/api/tasks", tasks);
 
 const PORT = process.env.PORT || 8000;
+if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+}
 
 module.exports = app;
