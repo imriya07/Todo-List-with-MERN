@@ -6,7 +6,7 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://todo-list-frontend-nine.vercel.app",
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
