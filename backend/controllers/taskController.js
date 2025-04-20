@@ -54,10 +54,11 @@ exports.deleteTask = async (req, res) => {
 
 exports.markTaskAsCompleted = async (req, res) => {
   const { id } = req.params;
+  const { completed } = req.body; // get the completion status from the request body
   try {
     const task = await Task.findByIdAndUpdate(
       id,
-      { completed: true },
+      { completed }, // update the task with the provided completion status
       { new: true }
     );
 
