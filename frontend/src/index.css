@@ -1,0 +1,168 @@
+.login-background {
+  background-image: url('./images/todobg\ \(1\).jpg'); /* public folder path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-card {
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.todo{
+  color: rgb(9, 113, 218);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.welcome{
+  color: rgb(9, 113, 218);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 800;
+}
+.custom-form-container {
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent white */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.register-text{
+  color: rgb(9, 113, 218);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+.login-text{
+  color: green;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 800;
+  font-size: 30px;
+}
+button.login-button{
+  background-color: red;
+}
+/* Background section */
+.todo-background {
+  min-height: 100vh;
+  padding: 40px 0;
+  background-image: url('./images/to-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card container */
+/* index.css */
+
+.todo-card {
+  width: 550px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(69, 66, 66, 0.2); /* transparent white */
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+
+/* Task list item */
+.task-item {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-completed {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+/* Title styles */
+.todo-title {
+  color: rgb(9, 113, 218);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+.bg-Done{
+  background-color: green;
+}
+.title-text{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+.description-text{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 17px;
+}
+.todo-heading{
+  color: rgb(9, 113, 218);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 40px;
+  font-weight: 800;
+}
+/* Add this CSS to your stylesheet */
+input.placeholder-custom::placeholder {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: black;
+}
+textarea.placeholder-textarea::placeholder{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: black;
+}
+a.logout{
+  color: white;
+  background-color: rgb(242, 31, 31);
+  border: none;
+  border-radius: 8px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+a.logout:hover{
+  background-color: red;
+}
+a.login{
+  color: white;
+  background-color: green;
+  border: none;
+  border-radius: 8px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+a.login:hover{
+  background-color: rgb(4, 112, 4);
+}
+a.register{
+  color: white;
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 8px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+button.login-btn{
+  background-color: green;
+  border: none;
+  border-radius: 8px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+button.login-btn:hover{
+  background-color: rgb(2, 112, 2);
+}
+button.register-btn{
+  background-color: rgb(9, 113, 218);
+  border: none;
+  border-radius: 8px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.welcometext{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 20px;
+}
+
+
+
+
+
