@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://frontend-nu-wine.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -26,8 +26,10 @@ app.use('/api/auth', auth);
 app.use('/api/tasks',tasks)
 
 const PORT = process.env.PORT || 8000;
+if (process.env.NODE_ENV !== "production") {
   app.listen(PORT, () => {
     console.log(`server running ${PORT}`);
   });
+}
 
 module.exports = app;
