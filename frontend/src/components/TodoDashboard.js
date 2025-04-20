@@ -16,11 +16,14 @@ const TodoDashboard = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem("authToken");
-      const res = await axios.get("http://localhost:5000/api/tasks", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        "https://backend-theta-plum-15.vercel.app/api/tasks",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setTasks(res.data);
     } catch (error) {
       toast.error("Failed to fetch tasks.");
@@ -36,11 +39,10 @@ const TodoDashboard = () => {
       return;
     }
 
-    // Check for duplicate title (case insensitive)
     const isDuplicateTitle = tasks.some(
       (task) =>
         task.title.trim().toLowerCase() === title.trim().toLowerCase() &&
-        task._id !== editTaskId // allow same title if editing current task
+        task._id !== editTaskId
     );
 
     if (isDuplicateTitle) {
@@ -52,7 +54,7 @@ const TodoDashboard = () => {
       const token = localStorage.getItem("authToken");
       if (editTaskId) {
         await axios.put(
-          `http://localhost:5000/api/tasks/${editTaskId}`,
+          `https://backend-theta-plum-15.vercel.app/api/tasks/${editTaskId}`,
           { title, description },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -61,7 +63,7 @@ const TodoDashboard = () => {
         toast.warning("Task updated successfully!");
       } else {
         await axios.post(
-          "http://localhost:5000/api/tasks",
+          "https://backend-theta-plum-15.vercel.app/api/tasks",
           { title, description },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -80,17 +82,12 @@ const TodoDashboard = () => {
     }
   };
 
-  // Toggle completion status
   const toggleCompletion = async (id, currentStatus) => {
     try {
       const token = localStorage.getItem("authToken");
-  
-      // Toggle the completion status
       const updatedStatus = !currentStatus;
-  
-      // Update the database with the new status (false for incomplete, true for complete)
       await axios.patch(
-        `http://localhost:5000/api/tasks/${id}/complete`,
+        `https://backend-theta-plum-15.vercel.app/api/tasks/${id}/complete`,
         { completed: updatedStatus },
         {
           headers: {
@@ -98,8 +95,8 @@ const TodoDashboard = () => {
           },
         }
       );
-  
-      fetchTasks(); // Re-fetch tasks to reflect the updated status
+
+      fetchTasks();
       toast.success(
         updatedStatus
           ? "Task marked as completed!"
@@ -110,16 +107,18 @@ const TodoDashboard = () => {
       console.error("Error toggling task completion:", error);
     }
   };
-  
 
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `https://backend-theta-plum-15.vercel.app/api/tasks/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setTasks(tasks.filter((task) => task._id !== id));
       toast.error("Task deleted successfully!");
     } catch (error) {
@@ -195,53 +194,58 @@ const TodoDashboard = () => {
           </form>
 
           <ul className="list-group">
-          {tasks.map((t) => (
-  <li
-    key={t._id}
-    className={`list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row ${
-      t.completed ? "bg-light text-muted" : ""
-    }`}
-    style={{
-      borderRadius: "10px",
-      marginBottom: "10px",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    }}
-  >
-    <div className="flex-grow-1 me-3">
-      <h5 className="mb-1 title-text">
-        {t.title}{" "}
-        {t.completed && <span className="badge bg-success">Done</span>}
-      </h5>
-      <p className="mb-1 description-text">{t.description}</p>
-    </div>
-    <div className="d-flex gap-2 mt-2 mt-md-0">
-      <button
-        onClick={() => toggleCompletion(t._id, t.completed)}
-        className="btn btn-sm btn-primary"
-        title={t.completed ? "Mark as Incomplete" : "Mark as Completed"}
-      >
-        <i
-          className={`bi bi-${t.completed ? "x-circle" : "check2-circle"}`}
-        ></i>
-      </button>
-      <button
-        onClick={() => handleEdit(t)}
-        className="btn btn-sm btn-warning"
-        title="Edit Task"
-      >
-        <i className="bi bi-pencil"></i>
-      </button>
-      <button
-        onClick={() => handleDelete(t._id)}
-        className="btn btn-sm btn-danger"
-        title="Delete Task"
-      >
-        <i className="bi bi-trash3"></i>
-      </button>
-    </div>
-  </li>
-))}
-
+            {tasks.map((t) => (
+              <li
+                key={t._id}
+                className={`list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row ${
+                  t.completed ? "bg-light text-muted" : ""
+                }`}
+                style={{
+                  borderRadius: "10px",
+                  marginBottom: "10px",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <div className="flex-grow-1 me-3">
+                  <h5 className="mb-1 title-text">
+                    {t.title}{" "}
+                    {t.completed && (
+                      <span className="badge bg-success">Done</span>
+                    )}
+                  </h5>
+                  <p className="mb-1 description-text">{t.description}</p>
+                </div>
+                <div className="d-flex gap-2 mt-2 mt-md-0">
+                  <button
+                    onClick={() => toggleCompletion(t._id, t.completed)}
+                    className="btn btn-sm btn-primary"
+                    title={
+                      t.completed ? "Mark as Incomplete" : "Mark as Completed"
+                    }
+                  >
+                    <i
+                      className={`bi bi-${
+                        t.completed ? "x-circle" : "check2-circle"
+                      }`}
+                    ></i>
+                  </button>
+                  <button
+                    onClick={() => handleEdit(t)}
+                    className="btn btn-sm btn-warning"
+                    title="Edit Task"
+                  >
+                    <i className="bi bi-pencil"></i>
+                  </button>
+                  <button
+                    onClick={() => handleDelete(t._id)}
+                    className="btn btn-sm btn-danger"
+                    title="Delete Task"
+                  >
+                    <i className="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

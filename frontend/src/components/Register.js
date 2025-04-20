@@ -3,7 +3,7 @@ import { Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing eye icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 
@@ -11,7 +11,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle visibility
+  const [passwordVisible, setPasswordVisible] = useState(false); 
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -41,7 +41,7 @@ const Register = () => {
     if (!validateForm()) return;
   
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/register', {
         name,
         email,
         password,
@@ -96,7 +96,7 @@ const Register = () => {
             />
             <div className="password-container position-relative">
               <input
-                type={passwordVisible ? 'text' : 'password'} // Toggle password visibility
+                type={passwordVisible ? 'text' : 'password'} 
                 className="form-control mb-3 placeholder-custom"
                 placeholder="Enter password"
                 value={password}

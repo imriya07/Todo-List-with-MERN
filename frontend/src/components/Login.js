@@ -3,14 +3,14 @@ import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // 👁️ Import eye icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; 
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false); // 👁️ Toggle state
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -35,7 +35,7 @@ const Login = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/login', {
         email,
         password,
       });
@@ -95,7 +95,7 @@ const Login = () => {
                   transform: 'translateY(-50%)',
                   cursor: 'pointer',
                   fontSize: '20px',
-                  color: 'black' // 👁️ Black icon color
+                  color: 'black' 
                 }}
                 onClick={() => setPasswordVisible(!passwordVisible)}
               >
