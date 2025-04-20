@@ -3,6 +3,7 @@ import { Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Importing eye icons
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 
@@ -10,6 +11,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle visibility
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -35,16 +37,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!validateForm()) return;
-
+  
     try {
-      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/register', {
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
         name,
         email,
         password,
       });
-
+  
       if (response.status === 201 || response.data.success) {
         toast.success('Registration successful!');
         setTimeout(() => {
@@ -52,10 +54,15 @@ const Register = () => {
         }, 2000);
       }
     } catch (error) {
-      console.error('Registration failed:', error);
-      toast.error('Something went wrong. Try again!');
+      if (error.response && error.response.status === 400) {
+        toast.error('User is already registered. Please go to the login page.');
+      } else {
+        console.error('Registration failed:', error);
+        toast.error('Something went wrong. Try again!');
+      }
     }
   };
+  
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -68,7 +75,7 @@ const Register = () => {
     <div className="login-background d-flex justify-content-center align-items-center min-vh-100 mt-5">
       <Container className="d-flex justify-content-center">
         <div className="custom-form-container p-4 rounded shadow" style={{ maxWidth: '400px', width: '100%' }}>
-          <h3 className="text-center  register-text">Register</h3>
+          <h3 className="text-center register-text">Register</h3>
           <p className='text-center plaeseregister'>Please register to access exclusive features.</p>
           <form onSubmit={handleSubmit}>
             <input
@@ -87,14 +94,30 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input
-              type="password"
-              className="form-control mb-3 placeholder-custom"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-container position-relative">
+              <input
+                type={passwordVisible ? 'text' : 'password'} // Toggle password visibility
+                className="form-control mb-3 placeholder-custom"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <div
+                className="password-toggle-icon position-absolute"
+                style={{
+                  right: '15px', 
+                  top: '50%', 
+                  transform: 'translateY(-50%)', 
+                  cursor: 'pointer',
+                  fontSize: '20px', 
+                  color: 'black', 
+                }}
+                onClick={() => setPasswordVisible(!passwordVisible)} 
+              >
+                {passwordVisible ? <FaEyeSlash /> : <FaEye />} 
+              </div>
+            </div>
             <Button type="submit" className="w-100 register-btn">
               Register
             </Button>

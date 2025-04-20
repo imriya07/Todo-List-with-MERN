@@ -3,12 +3,14 @@ import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // 👁️ Import eye icons
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false); // 👁️ Toggle state
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -33,7 +35,7 @@ const Login = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/login', {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password,
       });
@@ -76,14 +78,30 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input
-              type="password"
-              className="form-control mb-3 placeholder-custom"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-container position-relative">
+              <input
+                type={passwordVisible ? 'text' : 'password'}
+                className="form-control mb-3 placeholder-custom"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <div
+                className="password-toggle-icon position-absolute"
+                style={{
+                  right: '15px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  fontSize: '20px',
+                  color: 'black' // 👁️ Black icon color
+                }}
+                onClick={() => setPasswordVisible(!passwordVisible)}
+              >
+                {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+              </div>
+            </div>
             <Button type="submit" className="w-100 login-btn">
               Login
             </Button>
