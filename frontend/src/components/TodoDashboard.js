@@ -13,25 +13,38 @@ const TodoDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("https://backend-theta-plum-15.vercel.app/api/tasks");
+      const token = localStorage.getItem('authToken');
+      const res = await axios.get('http://localhost:5000/api/tasks', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTasks(res.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title.trim() === "" || description.trim() === "") return;
-
+  
     try {
+      const token = localStorage.getItem('authToken');
       if (editTaskId) {
-        await axios.put(`https://backend-theta-plum-15.vercel.app/api/tasks/${editTaskId}`, {
+        await axios.put(`http://localhost:5000/api/tasks/${editTaskId}`, {
           title,
           description,
+        }, {
+          headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post("https://backend-theta-plum-15.vercel.app/api/tasks", { title, description });
+        await axios.post("http://localhost:5000/api/tasks", {
+          title,
+          description,
+        }, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
       }
       fetchTasks();
       setTitle("");
@@ -40,25 +53,37 @@ const TodoDashboard = () => {
     } catch (error) {
       console.error("Error saving task:", error);
     }
-  };
+  };  
 
   const markAsCompleted = async (id) => {
     try {
-      await axios.patch(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}/complete`);
-      fetchTasks();
+      const token = localStorage.getItem('authToken');
+      await axios.patch(`http://localhost:5000/api/tasks/${id}/complete`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      fetchTasks(); 
     } catch (error) {
       console.error("Error marking task as completed:", error);
     }
   };
+  
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://backend-theta-plum-15.vercel.app/api/tasks/${id}`);
+      const token = localStorage.getItem('authToken');
+      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
+  
 
   const handleEdit = (task) => {
     setEditTaskId(task._id);

@@ -39,7 +39,7 @@ const Register = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/register', {
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
         name,
         email,
         password,
@@ -68,7 +68,8 @@ const Register = () => {
     <div className="login-background d-flex justify-content-center align-items-center min-vh-100 mt-5">
       <Container className="d-flex justify-content-center">
         <div className="custom-form-container p-4 rounded shadow" style={{ maxWidth: '400px', width: '100%' }}>
-          <h3 className="text-center mb-4 register-text">Register</h3>
+          <h3 className="text-center  register-text">Register</h3>
+          <p className='text-center plaeseregister'>Please register to access exclusive features.</p>
           <form onSubmit={handleSubmit}>
             <input
               type="text"

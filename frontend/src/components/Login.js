@@ -33,7 +33,7 @@ const Login = () => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post('https://backend-theta-plum-15.vercel.app/api/auth/login', {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password,
       });
@@ -65,7 +65,8 @@ const Login = () => {
     <div className="login-background d-flex justify-content-center align-items-center min-vh-100 mt-5">
       <Container className="d-flex justify-content-center">
         <div className="custom-form-container p-4 rounded shadow" style={{ maxWidth: '400px', width: '100%' }}>
-          <h3 className="text-center mb-4 login-text">Login</h3>
+          <h3 className="text-center login-text">Login</h3>
+          <p className='plaeseregister text-center'>Welcome back! Please enter your credentials.</p>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
